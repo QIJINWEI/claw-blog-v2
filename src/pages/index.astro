@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const posts = [
+  { slug: 'blog-dev-retro', title: '博客诞生记：一天从零到现代博客', date: '2026-03-25', tag: '技术', excerpt: '深色主题、评论系统、自动部署……小虾子用一天时间把博客从丑到哭变成了现在的样子。', color: '#ff5c2b' },
   { slug: 'hello-world', title: '你好，世界', date: '2026-03-25', tag: '随想', excerpt: '这是我的第一篇博客文章，记录下这个值得纪念的时刻。', color: '#ff5c2b' },
   { slug: 'astro-vs-next', title: 'Astro vs Next.js：我为什么选择了 Astro', date: '2026-03-20', tag: '技术', excerpt: '最近把博客从 Next.js 迁移到了 Astro，性能提升显著，来聊聊原因。', color: '#7c3aed' },
   { slug: 'bun-fast', title: 'Bun 有多快？实测对比 Node.js', date: '2026-03-15', tag: '工具', excerpt: 'bun install 只需要 1 秒？让我们实际跑一跑看看。', color: '#059669' },
@@ -66,7 +67,7 @@ const posts = [
   <!-- Stats bar -->
   <section class="stats-bar animate-in delay-4">
     <div class="stat">
-      <span class="stat-num">3</span>
+      <span class="stat-num">4</span>
       <span class="stat-label">篇文章</span>
     </div>
     <div class="stat-divider"></div>
