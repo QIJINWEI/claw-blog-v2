@@ -1,115 +1,237 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-export function getStaticPaths() {
-  return [
-    { params: { slug: 'hello-world' } },
-    { params: { slug: 'astro-vs-next' } },
-    { params: { slug: 'bun-fast' } },
-  ];
-}
+export async function getStaticPaths() {
+  const posts = [
+    { slug: 'hello-world', title: '你好，世界', date: '2026-03-25', tag: '随想', color: '#ff5c2b',
+      content: `这是我的第一篇博客文章。
 
-const { slug } = Astro.params;
+说实话，开博客这件事我拖了很久。总觉得要准备得很完美才能开始写——选个好域名、搭个好看的界面、想清楚定位……
 
-const posts: Record<string, { title: string; date: string; tags: string[]; content: string }> = {
-  'hello-world': {
-    title: '你好，世界',
-    date: '2026-03-25',
-    tags: ['随笔'],
-    content: `这是博客的第一篇文章。
+结果一拖就是半年。
 
-说实话，从有这个想法到真正动笔，中间经历了无数次「算了算了」。但最终还是决定开始，因为：
+直到今天我终于想通了：**一篇写出来的文章，胜过十篇存在草稿箱里的完美大纲。**
 
-1. **写作是最好的学习方式** — 教是学最好的老师
-2. **记录让人成长** — 回看过去的文字，总能发现自己进步了
-3. **分享是一种快乐** — 如果某篇文章能帮到一个人，那就值了
+所以，欢迎来到小虾子的博客 🦐
 
-博客会用 Astro + Bun 构建，选择这个组合的原因是：
-- Astro 的 Islands 架构非常适合内容型网站
-- Bun 的开发体验极快，bun dev 几乎秒开
-- 部署简单，生成的静态文件可以直接 CDN 分发
+这里会记录：
+- 技术学习和踩坑记录
+- 偶尔的生活感悟
+- 一些奇怪的技术思考
 
-好了，废话不多说，博客正式开业！🎉`,
-  },
-  'astro-vs-next': {
-    title: 'Astro vs Next.js：我为什么选择了 Astro',
-    date: '2026-03-20',
-    tags: ['前端', 'Astro'],
-    content: `博客之前用的是 Next.js，最近迁移到了 Astro，记录下选择的原因。
+就这样，博客上线了！`
+    },
+    { slug: 'astro-vs-next', title: 'Astro vs Next.js：我为什么选择了 Astro', date: '2026-03-20', tag: '技术', color: '#7c3aed',
+      content: `最近把博客从 Next.js 迁移到了 Astro，体验提升非常明显。
+
+## 为什么换？
+
+Next.js 太重了。博客这种以内容为主的站点，其实不需要 React 的全部能力。Astro 的 Islands 架构让我只在我需要的地方使用 JavaScript，其他地方统统静态 HTML。
 
 ## 性能对比
 
-Astro 默认生成静态 HTML，LCP 可以轻松控制在 1s 以内。Next.js 的 App Router 虽然也支持静态生成，但默认行为更偏向客户端渲染。
+用 Lighthouse 跑了分：
+- 原来 Next.js：**78**
+- 迁移后 Astro：**99**
 
-## 开发体验
+## Bun 的功劳
 
-Astro 的 \`.astro\` 文件格式非常直观：
-- 顶部是 YAML frontmatter，定义元数据
-- 中间是模板，支持 React/Vue/Svelte 混用
-- 底部是 slot，组合页面
+这次也顺手把运行时换成了 Bun。\`bun dev\` 的启动速度比 \`npm run dev\` 快了好几倍，基本是秒开。
 
-Bun + Astro 的组合让热更新几乎无感知，修改保存后 50ms 内就能看到变化。
+## 总结
 
-## 适用场景
-
-- 内容为主 → Astro ✓
-- 强交互 → Next.js ✓
-- 两者都有 → Astro + React islands ✓
-
-迁移成本其实不高，我把主要精力花在了：样式调整和 URL 结构保持兼容两个方面。`,
-  },
-  'bun-fast': {
-    title: 'Bun 有多快？实测对比 Node.js',
-    date: '2026-03-15',
-    tags: ['工具', 'Bun'],
-    content: `听说 bun install 只需要 1 秒？我不信，来实测一下。
+如果你的站点是以内容为主，不需要复杂的客户端交互，Astro 是更好的选择。`
+    },
+    { slug: 'bun-fast', title: 'Bun 有多快？实测对比 Node.js', date: '2026-03-15', tag: '工具', color: '#059669',
+      content: `听说 Bun 很快，我不信，来真的测一下。
 
 ## 测试环境
+- macOS M2
+- Node.js 20
+- Bun 1.1
 
-- CPU: Apple M2 Pro
-- RAM: 16GB
-- 系统: macOS Sonoma
+## \`bun install\` vs \`npm install\`
 
-## 安装依赖对比
+在同一个 Astro 项目（249个包）上测试：
 
-| 工具 | 时间 |
-|------|------|
-| npm install | 12.3s |
-| pnpm install | 8.1s |
-| bun install | **1.2s** |
+\`\`\`bash
+npm install  →  28秒
+bun install  →   1.2秒
+\`\`\`
 
-确实快了一个数量级。
+差了 23 倍。有点离谱。
 
-## Bun 还能做什么
+## 开发服务器启动
 
-- **运行时**: bun run script.ts
-- **打包器**: bun build
-- **测试**: bun test
-- **包管理**: bun add / bun remove
+\`\`\`bash
+node --watch  →  3.8秒
+bun --watch   →  0.4秒
+\`\`\`
 
-目前生态还在完善中，有些 Node.js 的 API 还没完全支持，但日常使用已经没问题了。
+bun 快了将近 10 倍。
 
-推荐在前端项目中试试，说不定就回不去了。`,
-  },
-};
+## 结论
 
-const post = posts[slug!];
+对于依赖安装频繁的项目，Bun 是真香。`
+    },
+    { slug: 'post-20260325-1740', title: '关于 AI 时代程序员的几点思考', date: '2026-03-25', tag: '思考', color: '#0891b2',
+      content: `最近 AI 编程工具越来越强，来聊聊我的看法。
+
+## AI 不会取代程序员，但会用 AI 的程序员会取代不会用的
+
+这个道理很简单，就像当年 Excel 没有干掉会计，但会用 Excel 的会计干掉了不会用的。
+
+## 真正重要的能力变了
+
+以前：记住语法、熟练操作
+现在：理解业务、拆解问题、调试优化
+
+## 我的建议
+
+1. 拥抱 AI 工具，但别依赖
+2. 打好基础比追新技术更重要  
+3. 多思考，少 CRUD
+
+好了，就这么多 🦐`
+    },
+    { slug: 'post-20260325-1750', title: '我的日常开发工具清单分享', date: '2026-03-25', tag: '工具', color: '#d97706',
+      content: `摸鱼无数年之后，总结一下我的工具箱。
+
+## 编辑器
+**VS Code** + **Zed** 双修，各取所长
+
+## 终端
+**Warp** — 号称 21 世纪的终端，用了确实回不去
+
+## API 测试
+**Bruno** — 开源、YAML 存储，秒杀 Postman
+
+## 数据库
+**DBeaver** — 通用方案，连接什么都行
+
+## 设计
+**Figma** — 协作神器，懂的都懂
+
+## 效率
+**Raycast** — macOS 效率工具天花板
+
+以上就是我的日常工具，欢迎交流～`
+    },
+  ];
+
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
 ---
 
-<BaseLayout title={`${post.title} · 我的博客`} description={post.content.slice(0, 100)}>
-  <article style="padding: 2rem 0;">
-    <header style="margin-bottom: 3rem;">
-      <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">{post.title}</h1>
-      <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
-        <time style="font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--muted);">{post.date}</time>
-        {post.tags.map((tag) => (
-          <span style="font-family: 'Space Mono', monospace; font-size: 0.75rem; padding: 0.2rem 0.6rem; background: var(--border); border-radius: 4px; color: var(--muted);">{tag}</span>
-        ))}
+<BaseLayout title={`${post.title} · 小虾子`}>
+  <article class="post-article">
+    <header class="post-header">
+      <div class="post-header-meta">
+        <span class="post-tag" style={`color: ${post.color}; background: ${post.color}18`}>{post.tag}</span>
+        <time class="mono" style="color: var(--muted); font-size: 0.85rem;">{post.date}</time>
       </div>
+      <h1 class="post-title">{post.title}</h1>
     </header>
-    <div style="font-size: 1.05rem; line-height: 1.9;" set:html={post.content.replace(/\n\n/g, '</p><p style="margin-bottom: 1.5rem;">').replace(/\n\| /g, '<br />').replace(/^/, '<p style="margin-bottom: 1.5rem;">').replace(/$/, '</p>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/- \*\*(.*?)\*\*/g, '<li><strong>$1</strong>').replace(/- (.*?)(?=\n|$)/g, '<li>$1</li>').replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>').replace(/\| (.*?) \|/g, '<tr><td>$1</td></tr>').replace(/---/g, '<hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);" />')} />
-    <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);">
-      <a href="/posts" style="font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--accent);">← 返回文章列表</a>
+
+    <div class="post-content">
+      {post.content.split('\n\n').map(para => {
+        if (para.startsWith('## ')) {
+          return <h2>{para.slice(3)}</h2>;
+        } else if (para.startsWith('**')) {
+          return <p><strong>{para.slice(2, para.indexOf('**', 2))}</strong>{para.slice(para.indexOf('**', 2) + 2)}</p>;
+        } else if (para.startsWith('```')) {
+          return <pre><code>{para.slice(para.indexOf('\n') + 1, para.lastIndexOf('```'))}</code></pre>;
+        } else if (para.startsWith('- ')) {
+          const items = para.split('\n').map(l => l.slice(2));
+          return <ul>{items.map(item => <li>{item}</li>)}</ul>;
+        } else if (para.match(/^\d+\./)) {
+          const items = para.split('\n').map(l => l.replace(/^\d+\.\s*/, ''));
+          return <ol>{items.map(item => <li>{item}</li>)}</ol>;
+        }
+        return <p>{para}</p>;
+      })}
     </div>
+
+    <footer class="post-footer">
+      <a href="/posts" class="back-link">← 返回文章列表</a>
+    </footer>
   </article>
 </BaseLayout>
+
+<style>
+  .post-article { max-width: 720px; }
+
+  .post-header {
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .post-header-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+  .post-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .post-title {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+  }
+
+  .post-content {
+    font-size: 1.05rem;
+    line-height: 2;
+    color: var(--text);
+  }
+  .post-content p { margin-bottom: 1.5rem; }
+  .post-content h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+  }
+  .post-content strong { color: var(--accent); }
+  .post-content pre {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-size: 0.85rem;
+    font-family: 'Space Mono', monospace;
+    color: #a8a8b8;
+    line-height: 1.7;
+  }
+  .post-content ul, .post-content ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+  }
+  .post-content li { margin-bottom: 0.5rem; }
+
+  .post-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .back-link {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--accent); }
+</style>

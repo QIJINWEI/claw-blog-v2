@@ -2,38 +2,438 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const posts = [
-  { slug: 'hello-world', title: '你好，世界', date: '2026-03-25', excerpt: '这是我的第一篇博客文章，记录下这个值得纪念的时刻。' },
-  { slug: 'astro-vs-next', title: 'Astro vs Next.js：我为什么选择了 Astro', date: '2026-03-20', excerpt: '最近把博客从 Next.js 迁移到了 Astro，性能提升显著，来聊聊原因。' },
-  { slug: 'bun-fast', title: 'Bun 有多快？实测对比 Node.js', date: '2026-03-15', excerpt: 'bun install 只需要 1 秒？让我们实际跑一跑看看。' },
+  { slug: 'hello-world', title: '你好，世界', date: '2026-03-25', tag: '随想', excerpt: '这是我的第一篇博客文章，记录下这个值得纪念的时刻。', color: '#ff5c2b' },
+  { slug: 'astro-vs-next', title: 'Astro vs Next.js：我为什么选择了 Astro', date: '2026-03-20', tag: '技术', excerpt: '最近把博客从 Next.js 迁移到了 Astro，性能提升显著，来聊聊原因。', color: '#7c3aed' },
+  { slug: 'bun-fast', title: 'Bun 有多快？实测对比 Node.js', date: '2026-03-15', tag: '工具', excerpt: 'bun install 只需要 1 秒？让我们实际跑一跑看看。', color: '#059669' },
 ];
 ---
 
-<BaseLayout title="首页 · 我的博客">
-  <section style="padding: 3rem 0;">
-    <h1 style="font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 1rem;">
-      记录思考<br />沉淀技术
+<BaseLayout title="小虾子的博客 🦐">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow animate-in">
+      <span class="tag">Welcome</span>
+      <span class="hero-date mono">2026 / 03 / 25</span>
+    </div>
+    <h1 class="hero-title animate-in delay-1">
+      记录<span class="accent">技术</span><br />
+      沉淀<span class="accent2">思考</span>
     </h1>
-    <p style="color: var(--muted); max-width: 480px; font-size: 1.1rem;">
-      一个热爱技术的开发者，关注前端、性能优化、以及一切有趣的事物。
+    <p class="hero-sub animate-in delay-2">
+      一个热爱折腾的开发者 🦐<br />
+      关注前端性能、全栈架构、偶尔写点生活感悟
     </p>
+    <div class="hero-cta animate-in delay-3">
+      <a href="/posts" class="btn-primary">随便看看 →</a>
+      <a href="/about" class="btn-ghost">认识小虾子</a>
+    </div>
+
+    <!-- Shrimp SVG -->
+    <div class="hero-shrimp animate-in delay-4">
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Body -->
+        <ellipse cx="60" cy="65" rx="22" ry="28" fill="#ff5c2b" opacity="0.9"/>
+        <!-- Segments -->
+        <path d="M45 55 Q60 52 75 55" stroke="#ff8c42" stroke-width="2" fill="none"/>
+        <path d="M43 65 Q60 62 77 65" stroke="#ff8c42" stroke-width="2" fill="none"/>
+        <path d="M45 75 Q60 72 75 75" stroke="#ff8c42" stroke-width="2" fill="none"/>
+        <!-- Tail fan -->
+        <path d="M50 90 L38 105 L50 100 L55 108 L60 98 L65 108 L70 100 L82 105 L70 90" fill="#ff5c2b" opacity="0.7"/>
+        <!-- Head -->
+        <ellipse cx="60" cy="38" rx="14" ry="12" fill="#ff6b3d"/>
+        <!-- Eyes -->
+        <circle cx="53" cy="36" r="4" fill="white"/>
+        <circle cx="67" cy="36" r="4" fill="white"/>
+        <circle cx="54" cy="37" r="2" fill="#1a1a25"/>
+        <circle cx="68" cy="37" r="2" fill="#1a1a25"/>
+        <!-- Antennae -->
+        <path d="M52 28 Q45 15 38 10" stroke="#ff8c42" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M68 28 Q75 15 82 10" stroke="#ff8c42" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <!-- Legs -->
+        <path d="M42 60 Q30 55 22 50" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+        <path d="M42 68 Q28 68 18 65" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+        <path d="M42 76 Q30 78 20 80" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+        <path d="M78 60 Q90 55 98 50" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+        <path d="M78 68 Q92 68 102 65" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+        <path d="M78 76 Q90 78 100 80" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+        <!-- Claws -->
+        <ellipse cx="18" cy="47" rx="8" ry="5" fill="#ff5c2b" transform="rotate(-30 18 47)"/>
+        <ellipse cx="102" cy="47" rx="8" ry="5" fill="#ff5c2b" transform="rotate(30 102 47)"/>
+      </svg>
+    </div>
   </section>
 
-  <section>
-    <h2 style="font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2rem;">
-      最新文章
-    </h2>
-    <div style="display: flex; flex-direction: column; gap: 0;">
-      {posts.map((post) => (
-        <a href={`/posts/${post.slug}`} style="display: block; padding: 1.5rem 0; border-bottom: 1px solid var(--border); transition: all 0.2s;">
-          <article>
-            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; gap: 1rem;">
-              <h3 style="font-size: 1.25rem; font-weight: 600;">{post.title}</h3>
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--muted); white-space: nowrap;">{post.date}</span>
+  <!-- Stats bar -->
+  <section class="stats-bar animate-in delay-4">
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <span class="stat-label">篇文章</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">次折腾</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-num">1</span>
+      <span class="stat-label">只小虾</span>
+    </div>
+  </section>
+
+  <!-- Latest posts -->
+  <section class="posts-section">
+    <div class="section-header">
+      <h2 class="section-title">最新文章</h2>
+      <a href="/posts" class="section-more">查看全部 →</a>
+    </div>
+
+    <div class="posts-grid">
+      {posts.map((post, i) => (
+        <a href={`/posts/${post.slug}`} class={`post-card delay-${i+1}`} style={`--card-accent: ${post.color}`}>
+          <div class="post-card-inner">
+            <div class="post-tag" style={`color: ${post.color}; background: ${post.color}18`}>{post.tag}</div>
+            <h3 class="post-title">{post.title}</h3>
+            <p class="post-excerpt">{post.excerpt}</p>
+            <div class="post-footer">
+              <span class="post-date mono">{post.date}</span>
+              <span class="post-arrow">→</span>
             </div>
-            <p style="color: var(--muted); font-size: 0.95rem;">{post.excerpt}</p>
-          </article>
+          </div>
+          <div class="card-glow"></div>
         </a>
       ))}
     </div>
   </section>
+
+  <!-- About teaser -->
+  <section class="about-teaser">
+    <div class="about-content">
+      <span class="tag">关于</span>
+      <h2>我是小虾子 🦐</h2>
+      <p>一个热爱技术的全栈开发者，喜欢用 Astro + Bun 折腾有趣的项目。代码简洁，生活也要精彩！</p>
+      <a href="/about" class="btn-ghost">了解更多 →</a>
+    </div>
+    <div class="about-decoration">
+      <div class="code-block">
+        <div class="code-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <pre class="mono">const 小虾子 = {{
+  身份: "全栈开发",
+  工具: ["Astro", "Bun", "TypeScript"],
+  爱好: ["写代码", "写博客", "摸鱼"],
+  座右铭: "持续输出比完美更重要"
+}};</pre>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    padding: 5rem 0 4rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto auto;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .hero-eyebrow {
+    grid-column: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .tag {
+    display: inline-block;
+    background: var(--accent-glow);
+    border: 1px solid rgba(255,92,43,0.25);
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .hero-date {
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  .hero-title {
+    grid-column: 1;
+    font-size: clamp(2.8rem, 8vw, 5rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    margin-top: 0.5rem;
+  }
+  .accent {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .accent2 {
+    color: #a78bfa;
+    -webkit-text-fill-color: #a78bfa;
+  }
+  .hero-sub {
+    grid-column: 1;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+    max-width: 420px;
+  }
+  .hero-cta {
+    grid-column: 1;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .hero-shrimp {
+    grid-column: 2;
+    grid-row: 1 / 5;
+    width: 160px;
+    height: 160px;
+    animation: shrimp-wave 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(255,92,43,0.3));
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gradient);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(255,92,43,0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(255,92,43,0.4);
+  }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-glow);
+  }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin: 2rem 0 5rem;
+  }
+  .stat {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .stat-num {
+    font-size: 1.8rem;
+    font-weight: 900;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-label {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  .stat-divider {
+    width: 1px;
+    height: 2rem;
+    background: var(--border);
+  }
+
+  /* Posts */
+  .posts-section { margin-bottom: 5rem; }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2rem;
+  }
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  .section-more {
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: gap 0.2s;
+  }
+  .section-more:hover { gap: 0.5rem; }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .post-card {
+    position: relative;
+    display: block;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .post-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--card-accent, var(--accent));
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+  .post-card-inner {
+    padding: 1.75rem;
+    position: relative;
+    z-index: 1;
+  }
+  .card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, var(--card-accent, var(--accent)), transparent);
+    opacity: 0.06;
+    transition: opacity 0.3s;
+  }
+  .post-card:hover .card-glow { opacity: 0.12; }
+
+  .post-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .post-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .post-excerpt {
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .post-date { font-size: 0.8rem; color: var(--muted); }
+  .post-arrow {
+    color: var(--card-accent, var(--accent));
+    font-weight: 700;
+    transition: transform 0.3s;
+    display: inline-block;
+  }
+  .post-card:hover .post-arrow { transform: translateX(4px); }
+
+  /* About teaser */
+  .about-teaser {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 3rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+  }
+  .about-content .tag { margin-bottom: 1rem; display: block; }
+  .about-content h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  .about-content p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .code-block {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .code-dots {
+    display: flex;
+    gap: 6px;
+    padding: 0.8rem 1rem;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+  .code-dots span {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+  .code-dots span:nth-child(1) { background: #ff5f57; }
+  .code-dots span:nth-child(2) { background: #ffbd2e; }
+  .code-dots span:nth-child(3) { background: #28ca41; }
+  .code-block pre {
+    padding: 1.25rem;
+    font-size: 0.82rem;
+    color: #a8a8b8;
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 3rem 0 3rem;
+    }
+    .hero-shrimp {
+      grid-column: 1;
+      grid-row: auto;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto;
+    }
+    .about-teaser { grid-template-columns: 1fr; gap: 2rem; padding: 2rem; }
+    .posts-grid { grid-template-columns: 1fr; }
+    .stats-bar { gap: 1rem; padding: 1rem 1.25rem; }
+  }
+</style>

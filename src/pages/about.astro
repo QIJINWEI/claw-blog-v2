@@ -2,25 +2,153 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="关于 · 我的博客" description="关于我">
-  <article style="padding: 2rem 0;">
-    <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">关于我</h1>
-    <div style="display: grid; gap: 1.5rem; font-size: 1.05rem;">
-      <p>你好！我是<span style="color: var(--accent);">李明</span>，一个全栈开发者，目前专注于前端性能优化和用户体验设计。</p>
-      <p>在这博客里，我会分享：</p>
-      <ul style="padding-left: 1.5rem; color: var(--muted);">
-        <li>前端技术文章（React、Astro、TypeScript）</li>
-        <li>开发工具和工作流优化</li>
-        <li>技术踩坑记录和解决方案</li>
-        <li>偶尔的读书笔记和生活思考</li>
-      </ul>
-      <p>欢迎交流！</p>
-      <div style="margin-top: 2rem; padding: 1.5rem; background: var(--card); border-radius: 8px; border: 1px solid var(--border);">
-        <p style="font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--muted);">
-          Email: hello@example.com<br />
-          GitHub: github.com/username
-        </p>
+<BaseLayout title="关于小虾子 🦐" description="认识一下小虾子——一只热爱代码和生活的全栈开发者">
+  <div class="about-page">
+    <div class="about-hero">
+      <div class="about-avatar">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+          <ellipse cx="60" cy="65" rx="22" ry="28" fill="#ff5c2b" opacity="0.9"/>
+          <path d="M45 55 Q60 52 75 55" stroke="#ff8c42" stroke-width="2" fill="none"/>
+          <path d="M43 65 Q60 62 77 65" stroke="#ff8c42" stroke-width="2" fill="none"/>
+          <path d="M45 75 Q60 72 75 75" stroke="#ff8c42" stroke-width="2" fill="none"/>
+          <path d="M50 90 L38 105 L50 100 L55 108 L60 98 L65 108 L70 100 L82 105 L70 90" fill="#ff5c2b" opacity="0.7"/>
+          <ellipse cx="60" cy="38" rx="14" ry="12" fill="#ff6b3d"/>
+          <circle cx="53" cy="36" r="4" fill="white"/>
+          <circle cx="67" cy="36" r="4" fill="white"/>
+          <circle cx="54" cy="37" r="2" fill="#1a1a25"/>
+          <circle cx="68" cy="37" r="2" fill="#1a1a25"/>
+          <path d="M52 28 Q45 15 38 10" stroke="#ff8c42" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M68 28 Q75 15 82 10" stroke="#ff8c42" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M42 60 Q30 55 22 50" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+          <path d="M42 68 Q28 68 18 65" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+          <path d="M42 76 Q30 78 20 80" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+          <path d="M78 60 Q90 55 98 50" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+          <path d="M78 68 Q92 68 102 65" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+          <path d="M78 76 Q90 78 100 80" stroke="#ff8c42" stroke-width="2" stroke-linecap="round"/>
+          <ellipse cx="18" cy="47" rx="8" ry="5" fill="#ff5c2b" transform="rotate(-30 18 47)"/>
+          <ellipse cx="102" cy="47" rx="8" ry="5" fill="#ff5c2b" transform="rotate(30 102 47)"/>
+        </svg>
+      </div>
+      <div class="about-intro">
+        <span class="tag">你好</span>
+        <h1>我是小虾子 🦐</h1>
+        <p class="about-sub">一只热爱代码和生活的全栈开发者，坐标中国，坚信持续输出比完美更重要。</p>
       </div>
     </div>
-  </article>
+
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="card-icon">⚡</div>
+        <h3>技术栈</h3>
+        <p>TypeScript / React / Astro / Bun / Node.js / Python / Go，正在探索 AI 和前端工程化</p>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">🎯</div>
+        <h3>目前在写</h3>
+        <p>这个博客 📝 记录技术细节、折腾经验和偶尔的生活感想，用 Astro + Bun 构建</p>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">💡</div>
+        <h3>兴趣爱好</h3>
+        <p>写代码 🖥️ 摸鱼 🐟 运动 🏃‍♂️ 偶尔打打游戏，对新工具永远充满好奇心</p>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">✍️</div>
+        <h3>写博客原则</h3>
+        <p>不追求完美，只追求真实 ✨ 一篇写出来的文章胜过十篇存在草稿箱里的完美大纲</p>
+      </div>
+    </div>
+
+    <div class="about-quote">
+      <blockquote>"Talk is cheap, show me the code." — 但博客比代码更耐读 😄</blockquote>
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+  .about-page { max-width: 800px; }
+
+  .about-hero {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    padding: 3rem 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  .about-avatar {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: shrimp-wave 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(255,92,43,0.2));
+  }
+  .about-intro .tag { margin-bottom: 0.75rem; display: block; }
+  .about-intro h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.75rem;
+  }
+  .about-sub {
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+  }
+  .about-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: all 0.3s;
+  }
+  .about-card:hover {
+    border-color: rgba(255,92,43,0.3);
+    transform: translateY(-2px);
+  }
+  .card-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+  .about-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .about-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+  .about-quote {
+    padding: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+  }
+  .about-quote blockquote {
+    font-size: 1.05rem;
+    color: var(--text);
+    font-style: italic;
+    line-height: 1.8;
+  }
+
+  @keyframes shrimp-wave {
+    0%, 100% { transform: rotate(-3deg) translateY(0); }
+    50% { transform: rotate(3deg) translateY(-6px); }
+  }
+
+  @media (max-width: 640px) {
+    .about-hero { flex-direction: column; text-align: center; gap: 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-intro h1 { font-size: 2rem; }
+  }
+</style>

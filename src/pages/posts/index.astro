@@ -1,31 +1,115 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const allPosts = [
-  { slug: 'hello-world', title: '你好，世界', date: '2026-03-25', tags: ['随笔'], excerpt: '这是我的第一篇博客文章。' },
-  { slug: 'astro-vs-next', title: 'Astro vs Next.js：我为什么选择了 Astro', date: '2026-03-20', tags: ['前端', 'Astro'], excerpt: '最近把博客从 Next.js 迁移到了 Astro。' },
-  { slug: 'bun-fast', title: 'Bun 有多快？实测对比 Node.js', date: '2026-03-15', tags: ['工具', 'Bun'], excerpt: 'bun install 只需要 1 秒？让我们实际跑一跑看看。' },
+const posts = [
+  { slug: 'hello-world', title: '你好，世界', date: '2026-03-25', tag: '随想', excerpt: '这是我的第一篇博客文章，记录下这个值得纪念的时刻。', color: '#ff5c2b' },
+  { slug: 'astro-vs-next', title: 'Astro vs Next.js：我为什么选择了 Astro', date: '2026-03-20', tag: '技术', excerpt: '最近把博客从 Next.js 迁移到了 Astro，性能提升显著，来聊聊原因。', color: '#7c3aed' },
+  { slug: 'bun-fast', title: 'Bun 有多快？实测对比 Node.js', date: '2026-03-15', tag: '工具', excerpt: 'bun install 只需要 1 秒？让我们实际跑一跑看看。', color: '#059669' },
+  { slug: 'post-20260325-1740', title: '关于 AI 时代程序员的几点思考', date: '2026-03-25', tag: '思考', excerpt: 'AI 时代，程序员的角色在发生变化……', color: '#0891b2' },
+  { slug: 'post-20260325-1750', title: '我的日常开发工具清单分享', date: '2026-03-25', tag: '工具', excerpt: '摸鱼无数之后，这些是我的终极工具箱……', color: '#d97706' },
 ];
 ---
 
-<BaseLayout title="文章 · 我的博客">
-  <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">所有文章</h1>
-  <div style="display: flex; flex-direction: column; gap: 0;">
-    {allPosts.map((post) => (
-      <a href={`/posts/${post.slug}`} style="display: block; padding: 1.5rem 0; border-bottom: 1px solid var(--border);">
-        <article>
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; gap: 1rem; flex-wrap: wrap;">
-            <h3 style="font-size: 1.2rem; font-weight: 600;">{post.title}</h3>
-            <span style="font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--muted);">{post.date}</span>
+<BaseLayout title="所有文章 🦐" description="小虾子的全部文章">
+  <div class="posts-page">
+    <div class="posts-header">
+      <span class="tag">文章列表</span>
+      <h1>所有文章 <span class="count mono">({posts.length})</span></h1>
+      <p class="posts-sub">记录技术、思考与生活，持续输出中……</p>
+    </div>
+
+    <div class="posts-list">
+      {posts.map((post, i) => (
+        <a href={`/posts/${post.slug}`} class="post-item" style={`--accent: ${post.color}`}>
+          <div class="post-item-inner">
+            <div class="post-meta">
+              <span class="post-tag" style={`color: ${post.color}; background: ${post.color}18`}>{post.tag}</span>
+              <span class="post-date mono">{post.date}</span>
+            </div>
+            <h2 class="post-title">{post.title}</h2>
+            <p class="post-excerpt">{post.excerpt}</p>
           </div>
-          <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 0.5rem;">{post.excerpt}</p>
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            {post.tags.map((tag) => (
-              <span style="font-family: 'Space Mono', monospace; font-size: 0.75rem; padding: 0.2rem 0.6rem; background: var(--border); border-radius: 4px; color: var(--muted);">{tag}</span>
-            ))}
-          </div>
-        </article>
-      </a>
-    ))}
+          <div class="post-arrow">→</div>
+          <div class="post-accent"></div>
+        </a>
+      ))}
+    </div>
   </div>
 </BaseLayout>
+
+<style>
+  .posts-page { max-width: 800px; }
+  .posts-header { padding: 3rem 0 3rem; }
+  .posts-header .tag { margin-bottom: 1rem; display: block; }
+  .posts-header h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    margin-bottom: 0.75rem;
+  }
+  .posts-sub { color: var(--muted); font-size: 1rem; }
+  .count { color: var(--muted); font-size: 1.5rem; }
+
+  .posts-list { display: flex; flex-direction: column; gap: 1rem; }
+
+  .post-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 1.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .post-item:hover {
+    transform: translateX(6px);
+    border-color: var(--accent);
+    background: var(--surface2);
+  }
+  .post-item-inner { flex: 1; }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .post-tag {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .post-date { font-size: 0.8rem; color: var(--muted); }
+  .post-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  .post-excerpt { color: var(--muted); font-size: 0.88rem; }
+  .post-arrow {
+    font-size: 1.5rem;
+    color: var(--accent);
+    font-weight: 700;
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .post-item:hover .post-arrow { transform: translateX(4px); }
+  .post-accent {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-radius: 0 2px 2px 0;
+  }
+  .post-item:hover .post-accent { opacity: 1; }
+</style>
