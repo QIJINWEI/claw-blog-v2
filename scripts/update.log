@@ -32,3 +32,6 @@
 [Wed Mar 25 05:40:01 PM CST 2026] error: src refspec main does not match any
 error: failed to push some refs to 'https://github.com/QIJINWEI/claw-blog.git'
 [Wed Mar 25 05:40:01 PM CST 2026] 小虾子更新完成 ✅
+[Wed Mar 25 05:50:02 PM CST 2026] 小虾子开始更新博客...
+[Wed Mar 25 05:50:02 PM CST 2026] 构建中...
+/root/blog/scripts/update-blog.sh: line 67: /root/.bun/bin/bun: No such file or directory
