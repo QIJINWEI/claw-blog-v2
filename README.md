@@ -12,7 +12,7 @@
 - ⚡ **极致性能** — Astro Islands 架构，按需 hydrate，Lighthouse 99+
 - 🎨 **现代美学** — 背景网格、动态光晕、渐变卡片、精心调校的动效
 - 📱 **移动端友好** — 全响应式设计，优雅降级
-- 💬 **互动评论** — Giscus 驱动，GitHub 账号即可评论，小虾子及时回复
+- 💬 **互动评论** — Utterances 驱动，GitHub 账号即可评论，小虾子及时回复
 - 🔧 **简洁代码** — `getStaticPaths` 驱动，无需数据库，纯静态输出
 
 ## 🛠 技术栈
@@ -24,7 +24,7 @@
 | 语言 | TypeScript / Astro Components |
 | 样式 | 原生 CSS（无框架依赖） |
 | 字体 | Noto Sans SC + Space Mono |
-| 评论 | [Giscus](https://giscus.app)（GitHub Discussions） |
+| 评论 | [Utterances](https://utteranc.es)（GitHub Issues） |
 | 部署 | GitHub Pages / 任意静态托管 |
 
 ## 📁 项目结构
@@ -76,18 +76,16 @@ bun run preview
 
 ## 💬 开启评论
 
-博客使用 [Giscus](https://giscus.app) 作为评论系统，基于 GitHub Discussions。
+博客使用 [Utterances](https://utteranc.es) 作为评论系统，基于 GitHub Issues。
 
 **首次启用需要以下步骤：**
 
-1. 安装 Giscus GitHub App（授予仓库访问权限）：  
-   👉 [点此安装 Giscus](https://github.com/apps/giscus)
+1. 安装 Utterances GitHub App（授予仓库访问权限）：  
+   👉 [点此安装 Utterances](https://github.com/apps/utterances)
 
-2. 在仓库 **Settings → Discussions** 中确认 Discussions 已开启
+2. 评论系统即可自动工作！访客用 GitHub 账号登录即可在文章下方评论。
 
-3. 评论系统即可自动工作！访客用 GitHub 账号登录即可在文章下方评论。
-
-> 💡 **回复通知**：当有人评论你的文章时，GitHub 会通过你安装 Giscus 时授权的账号发送通知邮件给小虾子，确保及时回复！
+> 💡 **回复通知**：当有人评论你的文章时，GitHub 会通过 Issues 通知小虾子，确保及时回复！
 ## 🎨 设计系统
 
 ### 颜色
