@@ -1,0 +1,34 @@
+[Wed Mar 25 05:10:01 PM CST 2026] 小虾子开始更新博客...
+[Wed Mar 25 05:10:01 PM CST 2026] 构建中...
+/root/blog/scripts/update-blog.sh: line 70: /root/.bun/bin/bun: No such file or directory
+[main d64181b] chore: 自动更新 2026-03-25 17:10
+ 3 files changed, 102 insertions(+)
+ create mode 100755 scripts/update-blog.sh
+ create mode 100644 scripts/update.log
+ create mode 100644 src/pages/posts/post-20260325-1710.astro
+[Wed Mar 25 05:17:08 PM CST 2026] fatal: unable to access 'https://github.com/QIJINWEI/claw-blog.git/': Recv failure: Connection reset by peer
+[Wed Mar 25 05:17:08 PM CST 2026] 小虾子更新完成 ✅
+[Wed Mar 25 05:20:01 PM CST 2026] 小虾子开始更新博客...
+[Wed Mar 25 05:20:01 PM CST 2026] 构建中...
+/root/blog/scripts/update-blog.sh: line 70: /root/.bun/bin/bun: No such file or directory
+[main d444be4] chore: 自动更新 2026-03-25 17:20
+ 4 files changed, 136 insertions(+)
+ create mode 100755 scripts/github-api-push.sh
+ create mode 100644 scripts/github-push.sh
+ create mode 100644 src/pages/posts/post-20260325-1720.astro
+[Wed Mar 25 05:22:15 PM CST 2026] fatal: unable to access 'https://github.com/QIJINWEI/claw-blog.git/': Failed to connect to github.com port 443 after 133661 ms: Couldn't connect to server
+[Wed Mar 25 05:22:15 PM CST 2026] 小虾子更新完成 ✅
+[Wed Mar 25 05:30:01 PM CST 2026] 小虾子开始更新博客...
+[Wed Mar 25 05:30:01 PM CST 2026] 构建中...
+/root/blog/scripts/update-blog.sh: line 70: /root/.bun/bin/bun: No such file or directory
+[main 5490aba] chore: 自动更新 2026-03-25 17:30
+ 2 files changed, 29 insertions(+)
+ create mode 100644 src/pages/posts/post-20260325-1730.astro
+[Wed Mar 25 05:31:32 PM CST 2026] fatal: unable to access 'https://github.com/QIJINWEI/claw-blog.git/': Empty reply from server
+[Wed Mar 25 05:31:32 PM CST 2026] 小虾子更新完成 ✅
+[Wed Mar 25 05:40:01 PM CST 2026] 小虾子开始更新博客...
+[Wed Mar 25 05:40:01 PM CST 2026] 构建中...
+/root/blog/scripts/update-blog.sh: line 70: /root/.bun/bin/bun: No such file or directory
+[Wed Mar 25 05:40:01 PM CST 2026] error: src refspec main does not match any
+error: failed to push some refs to 'https://github.com/QIJINWEI/claw-blog.git'
+[Wed Mar 25 05:40:01 PM CST 2026] 小虾子更新完成 ✅

@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'hello-world' } },
+    { params: { slug: 'astro-vs-next' } },
+    { params: { slug: 'bun-fast' } },
+  ];
+}
+
+const { slug } = Astro.params;
+
+const posts: Record<string, { title: string; date: string; tags: string[]; content: string }> = {
+  'hello-world': {
+    title: '你好，世界',
+    date: '2026-03-25',
+    tags: ['随笔'],
+    content: `这是博客的第一篇文章。
+
+说实话，从有这个想法到真正动笔，中间经历了无数次「算了算了」。但最终还是决定开始，因为：
+
+1. **写作是最好的学习方式** — 教是学最好的老师
+2. **记录让人成长** — 回看过去的文字，总能发现自己进步了
+3. **分享是一种快乐** — 如果某篇文章能帮到一个人，那就值了
+
+博客会用 Astro + Bun 构建，选择这个组合的原因是：
+- Astro 的 Islands 架构非常适合内容型网站
+- Bun 的开发体验极快，bun dev 几乎秒开
+- 部署简单，生成的静态文件可以直接 CDN 分发
+
+好了，废话不多说，博客正式开业！🎉`,
+  },
+  'astro-vs-next': {
+    title: 'Astro vs Next.js：我为什么选择了 Astro',
+    date: '2026-03-20',
+    tags: ['前端', 'Astro'],
+    content: `博客之前用的是 Next.js，最近迁移到了 Astro，记录下选择的原因。
+
+## 性能对比
+
+Astro 默认生成静态 HTML，LCP 可以轻松控制在 1s 以内。Next.js 的 App Router 虽然也支持静态生成，但默认行为更偏向客户端渲染。
+
+## 开发体验
+
+Astro 的 \`.astro\` 文件格式非常直观：
+- 顶部是 YAML frontmatter，定义元数据
+- 中间是模板，支持 React/Vue/Svelte 混用
+- 底部是 slot，组合页面
+
+Bun + Astro 的组合让热更新几乎无感知，修改保存后 50ms 内就能看到变化。
+
+## 适用场景
+
+- 内容为主 → Astro ✓
+- 强交互 → Next.js ✓
+- 两者都有 → Astro + React islands ✓
+
+迁移成本其实不高，我把主要精力花在了：样式调整和 URL 结构保持兼容两个方面。`,
+  },
+  'bun-fast': {
+    title: 'Bun 有多快？实测对比 Node.js',
+    date: '2026-03-15',
+    tags: ['工具', 'Bun'],
+    content: `听说 bun install 只需要 1 秒？我不信，来实测一下。
+
+## 测试环境
+
+- CPU: Apple M2 Pro
+- RAM: 16GB
+- 系统: macOS Sonoma
+
+## 安装依赖对比
+
+| 工具 | 时间 |
+|------|------|
+| npm install | 12.3s |
+| pnpm install | 8.1s |
+| bun install | **1.2s** |
+
+确实快了一个数量级。
+
+## Bun 还能做什么
+
+- **运行时**: bun run script.ts
+- **打包器**: bun build
+- **测试**: bun test
+- **包管理**: bun add / bun remove
+
+目前生态还在完善中，有些 Node.js 的 API 还没完全支持，但日常使用已经没问题了。
+
+推荐在前端项目中试试，说不定就回不去了。`,
+  },
+};
+
+const post = posts[slug!];
+---
+
+<BaseLayout title={`${post.title} · 我的博客`} description={post.content.slice(0, 100)}>
+  <article style="padding: 2rem 0;">
+    <header style="margin-bottom: 3rem;">
+      <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 1rem;">{post.title}</h1>
+      <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+        <time style="font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--muted);">{post.date}</time>
+        {post.tags.map((tag) => (
+          <span style="font-family: 'Space Mono', monospace; font-size: 0.75rem; padding: 0.2rem 0.6rem; background: var(--border); border-radius: 4px; color: var(--muted);">{tag}</span>
+        ))}
+      </div>
+    </header>
+    <div style="font-size: 1.05rem; line-height: 1.9;" set:html={post.content.replace(/\n\n/g, '</p><p style="margin-bottom: 1.5rem;">').replace(/\n\| /g, '<br />').replace(/^/, '<p style="margin-bottom: 1.5rem;">').replace(/$/, '</p>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/- \*\*(.*?)\*\*/g, '<li><strong>$1</strong>').replace(/- (.*?)(?=\n|$)/g, '<li>$1</li>').replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>').replace(/\| (.*?) \|/g, '<tr><td>$1</td></tr>').replace(/---/g, '<hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);" />')} />
+    <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+      <a href="/posts" style="font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--accent);">← 返回文章列表</a>
+    </div>
+  </article>
+</BaseLayout>

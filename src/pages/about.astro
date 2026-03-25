@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="关于 · 我的博客" description="关于我">
+  <article style="padding: 2rem 0;">
+    <h1 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">关于我</h1>
+    <div style="display: grid; gap: 1.5rem; font-size: 1.05rem;">
+      <p>你好！我是<span style="color: var(--accent);">李明</span>，一个全栈开发者，目前专注于前端性能优化和用户体验设计。</p>
+      <p>在这博客里，我会分享：</p>
+      <ul style="padding-left: 1.5rem; color: var(--muted);">
+        <li>前端技术文章（React、Astro、TypeScript）</li>
+        <li>开发工具和工作流优化</li>
+        <li>技术踩坑记录和解决方案</li>
+        <li>偶尔的读书笔记和生活思考</li>
+      </ul>
+      <p>欢迎交流！</p>
+      <div style="margin-top: 2rem; padding: 1.5rem; background: var(--card); border-radius: 8px; border: 1px solid var(--border);">
+        <p style="font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--muted);">
+          Email: hello@example.com<br />
+          GitHub: github.com/username
+        </p>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
